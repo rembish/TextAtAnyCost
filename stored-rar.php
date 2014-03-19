@@ -211,7 +211,7 @@ $rar->create($rarfile);
 foreach ($array as $value) {
 if ($value == '.' OR $value == '..') continue; 
 elseif (is_dir($value)) $rar->addFile($value); 
-elseif (is_file()) $rar->addDirectory($value);
+elseif (is_file($value)) $rar->addDirectory($value);
 }
 return $rar->close();    
 }
