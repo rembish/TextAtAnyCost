@@ -191,4 +191,28 @@ class store_rar {
 		return $out;
 	}
 };
+
+
+//Функция для легкого использования класса
+//
+//Передаём функции 2 параметра:
+//$array — массив файлов и папок для добавления в архив
+//$rarfile — имя создаваемого архива  
+//На выходе получаем: true — если архив создался, false — если нет 
+//
+//Пример
+//$arrs = array('readme.txt','index.php','/home/another/www/');
+//$arhive = 'israr.rar';
+//to_rar($arrs,$arhive);
+
+function to_rar($array,$rarfile) {
+$rar = new store_rar;
+$rar->create($rarfile);
+foreach ($array as $value) {
+if ($value == '.' OR $value == '..') continue; 
+elseif (is_dir($value)) $rar->addFile($value); 
+elseif (is_file($value)) $rar->addDirectory($value);
+}
+return $rar->close();    
+}
 ?>
