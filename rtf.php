@@ -86,8 +86,8 @@ function rtf2text($filename) {
 						#dump($fonts, false);
 						if (!empty($stack[$j]["mac"]) || @$fonts[$stack[$j]["f"]] == 77)
 							$document .= from_macRoman(hexdec($hex));
-						elseif (@$stack[$j]["ansicpg"] == "1250" || @$stack[$j]["lang"] == "1029") 
-							$document .= to_windows1250(hexdec($hex));
+						elseif (@$stack[$j]["ansicpg"] == "1251" || @$stack[$j]["lang"] == "1029") 
+							$document .= chr(hexdec($hex));
 						else
 							$document .= "&#".hexdec($hex).";";
 					}
@@ -229,6 +229,6 @@ function rtf2text($filename) {
         }
     }
     // Возвращаем, что получили.
-    return html_entity_decode(iconv("windows-1250", "utf-8", $document), ENT_QUOTES, "UTF-8");
+    return html_entity_decode(iconv("windows-1251", "utf-8", $document), ENT_QUOTES, "UTF-8");
 }
 ?>
