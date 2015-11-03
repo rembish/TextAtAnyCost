@@ -16,10 +16,11 @@ function getTextFromZippedXML($archiveFile, $contentFile) {
             $content = $zip->getFromIndex($index);
             // Закрываем zip-архив, он нам больше не нужен
             $zip->close();
-            
+
             // После этого подгружаем все entity и по возможности include'ы других файлов
             // Проглатываем ошибки и предупреждения
-            $xml = DOMDocument::loadXML($content, LIBXML_NOENT | LIBXML_XINCLUDE | LIBXML_NOERROR | LIBXML_NOWARNING);
+            $xml = new DOMDocument();
+            $xml->loadXML($content, LIBXML_NOENT | LIBXML_XINCLUDE | LIBXML_NOERROR | LIBXML_NOWARNING);
             // После чего возвращаем данные без XML-тегов форматирования
 
             return iconv("utf-8", "windows-1250", strip_tags($xml->saveXML()));

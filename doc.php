@@ -136,7 +136,7 @@ class doc extends cfb {
 		return $text;
 	}
 	// Функция преобразования из Unicode в UTF8, а то как-то не айс.
-	private function unicode_to_utf8($in) {
+	protected function unicode_to_utf8($in, $check = false) {
 		$out = "";
 		// Идћм по двухбайтовым последовательностям
 		for ($i = 0; $i < strlen($in); $i += 2) {
