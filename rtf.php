@@ -29,10 +29,18 @@ function from_macRoman($c) {
 	return $c;
 }
 
-function rtf2text($filename) {
-    // Пытаемся прочить данные из переданного нам rtf-файла, в случае успеха -
-    // продолжаем наше злобненькое дело.
-    $text = file_get_contents($filename);
+function rtfTextFromFile($filename){
+	// Пытаемся прочить данные из переданного нам rtf-файла, в случае успеха -
+	// продолжаем наше злобненькое дело.
+	$text = file_get_contents($filename);
+	return rtf2text($text);
+}
+
+private function rtfTextFromString($text){
+	return rtf2text($text);
+}
+
+function rtf2text($text) {
     if (!strlen($text))
         return "";
 
@@ -208,6 +216,8 @@ function rtf2text($filename) {
             case "{":
 				if ($j == -1)
 					$stack[++$j] = array();
+				elseif($j < 0 && !isset($stack[$j++]))
+                    $stack[0] = array();
 				else
 					array_push($stack, $stack[$j++]);
             break;
@@ -223,7 +233,7 @@ function rtf2text($filename) {
 				$document .= " ";
 			break;
             default:
-                if (rtf_isPlainText($stack[$j]))
+                if (isset($stack[$j]) && rtf_isPlainText($stack[$j]))
                     $document .= $c;
             break;
         }
