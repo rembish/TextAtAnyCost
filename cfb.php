@@ -301,9 +301,11 @@ class cfb {
 		} while ($from != self::ENDOFCHAIN);
 
 		// Удаляем конечные "пустые" вхождения, если таковые есть.
-		while($this->fatEntries[count($this->fatEntries) - 1]["type"] == 0)
-			array_pop($this->fatEntries);
-
+		$fcnt = count($this->fatEntries);
+		while($fcnt && $this->fatEntries[$fcnt - 1]["type"] == 0) {
+		    array_pop($this->fatEntries);
+		    $fcnt = count($this->fatEntries);
+		}
 		#dump($this->fatEntries, false);
 	}
 
