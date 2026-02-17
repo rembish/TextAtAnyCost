@@ -1,0 +1,38 @@
+{
+    "name": "rembish/text-at-any-cost",
+    "description": "Extract plain text from common document formats: DOC, PDF, PPT, RTF, DOCX, ODT, RAR",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Alex Rembish",
+            "email": "alex@rembish.org"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "ext-mbstring": "*",
+        "ext-zlib": "*",
+        "ext-dom": "*",
+        "ext-zip": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11",
+        "phpstan/phpstan": "^2",
+        "friendsofphp/php-cs-fixer": "^3"
+    },
+    "autoload": {
+        "psr-4": {
+            "TextAtAnyCost\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TextAtAnyCost\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
